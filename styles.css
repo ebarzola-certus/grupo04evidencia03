@@ -1,0 +1,361 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: #050510;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px 10px;
+  isolation: isolate;
+}
+
+/* ── HUD ── */
+#hud {
+  visibility: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 980px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 0.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px 12px 0 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+#hud span {
+  white-space: nowrap;
+}
+
+.hv {
+  color: #378add;
+}
+
+#lvl-bar {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.lvl-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+/* ── Canvas ── */
+#canvas {
+  display: block;
+  width: 100%;
+  max-width: 980px;
+  border-radius: 0 0 12px 12px;
+  border: 0.5px solid rgba(255, 255, 255, 0.12);
+  border-top: none;
+  cursor: crosshair;
+}
+
+/* ── Overlay (menú / niveles / resultados) ── */
+#ov {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 46px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border-radius: 0 0 12px 12px;
+  background: rgba(5, 5, 20, 0.88);
+  padding: 24px;
+}
+
+#ov h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: #fff;
+  margin: 0;
+  text-align: center;
+}
+
+#ov p {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+  text-align: center;
+  line-height: 1.6;
+  max-width: 360px;
+}
+
+/* ── Dificultades ── */
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  max-width: 380px;
+}
+
+.diff-btn {
+  padding: 14px 8px;
+  border: 1.5px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  transition: transform 0.15s;
+}
+
+.diff-btn:hover {
+  transform: scale(1.04);
+}
+.diff-btn.easy {
+  border-color: #1d9e75;
+}
+.diff-btn.normal {
+  border-color: #378add;
+}
+.diff-btn.hard {
+  border-color: #e24b4a;
+}
+
+.diff-btn .di {
+  font-size: 22px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.diff-btn .ds {
+  font-size: 11px;
+  opacity: 0.6;
+  display: block;
+  margin-top: 4px;
+}
+
+/* ── Botones ── */
+.play-btn {
+  background: #378add;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 30px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.play-btn:hover {
+  background: #185fa5;
+}
+.play-btn.green {
+  background: #1d9e75;
+}
+.play-btn.green:hover {
+  background: #0f6e56;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.btn-link:hover {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ── Contenedor del juego ── */
+#game-container {
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+/* ── Pantalla de introducción ── */
+#intro-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+}
+
+#intro-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.45;
+  border-radius: 0 0 12px 12px;
+}
+
+/* Si no hay video, el fondo de meteoros se ve igual */
+#intro-overlay {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  padding: 48px 24px;
+  background: linear-gradient(
+    160deg,
+    rgba(5, 5, 20, 0.45) 0%,
+    rgba(5, 5, 30, 0.82) 100%
+  );
+}
+
+#intro-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  max-width: 560px;
+  text-align: center;
+  animation: introFadeIn 0.8s ease both;
+}
+
+@keyframes introFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#intro-badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #378add;
+  background: rgba(55, 138, 221, 0.12);
+  border: 1px solid rgba(55, 138, 221, 0.3);
+  border-radius: 20px;
+  padding: 5px 16px;
+  text-transform: uppercase;
+}
+
+#intro-content h1 {
+  font-size: 38px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.01em;
+  text-shadow:
+    0 0 40px rgba(55, 138, 221, 0.55),
+    0 2px 8px rgba(0, 0, 0, 0.6);
+  margin: 0;
+  line-height: 1.1;
+}
+
+#intro-divider {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #378add, transparent);
+  border-radius: 2px;
+}
+
+#intro-desc {
+  font-size: 14.5px !important;
+  color: rgba(255, 255, 255, 0.72) !important;
+  line-height: 1.85 !important;
+  max-width: 420px !important;
+  margin: 0 !important;
+}
+
+#intro-desc strong {
+  color: #fff;
+}
+
+#intro-features {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.feat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 5px 14px;
+}
+
+.feat span {
+  font-weight: 500;
+}
+
+#intro-hint {
+  font-size: 11px !important;
+  color: rgba(255, 255, 255, 0.28) !important;
+  margin: 0 !important;
+  letter-spacing: 0.03em;
+}
+
+.big-btn {
+  padding: 14px 40px !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  border-radius: 10px !important;
+  box-shadow:
+    0 0 28px rgba(55, 138, 221, 0.45),
+    0 4px 16px rgba(0, 0, 0, 0.4);
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s !important;
+  letter-spacing: 0.02em;
+}
+
+.big-btn:hover {
+  transform: scale(1.05) translateY(-1px) !important;
+  box-shadow:
+    0 0 42px rgba(55, 138, 221, 0.7),
+    0 8px 24px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ── Canvas meteoros de fondo (detrás de todo) ── */
+#solar-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  display: none;
+  pointer-events: none;
+}

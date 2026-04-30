@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>☄️ Defensa Planetaria</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="game-container">
+      <canvas id="solar-canvas"></canvas>
+      <div id="hud">
+        <span id="diff-label" style="font-size: 12px; opacity: 0.7">—</span>
+        <span id="lvl-bar"></span>
+        <span>Nivel <span class="hv" id="lvl-n">—</span></span>
+        <span>
+          ☄️
+          <span class="hv" id="pts">0</span>/<span id="goal">—</span></span
+        >
+        <span>⏱ <span class="hv" id="tim">—</span>s</span>
+      </div>
+      <canvas id="canvas" width="980" height="720"></canvas>
+      <div id="ov"></div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
