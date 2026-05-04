@@ -39,7 +39,10 @@ function renderLvlBar(diff,active){
     lvlBarEl.appendChild(d);
   }
 }
-
+/*
+EMILIANO MUCHA BARZOLA
+Esta funcion mostrara la introduccion del juego 
+*/
 function showIntro() {
   running = false;
   clearInterval(timerInt); clearInterval(spawnInt);
@@ -47,17 +50,19 @@ function showIntro() {
   document.getElementById('hud').style.visibility = 'hidden';
   const sc = document.getElementById('solar-canvas');
   sc.style.display = 'block';
-  startBgMeteors(sc);
+  startBgMeteors(sc); // esta funcion mostrara los meteoritos detras del juego
   startMenuMusic(); // idempotente — no solapará si ya suena
   ov.style.display = 'flex';
   ov.innerHTML = introHtml();
 }
+/*
 
+*/
 function showMenu(){
   running=false;
   clearInterval(timerInt);clearInterval(spawnInt);
   meteors=[];explosions=[];
-  document.getElementById('hud').style.visibility='hidden';
+  document.getElementById('hud').style.visibility='hidden'; // 
   const sc=document.getElementById('solar-canvas');
   sc.style.display='block';
   startBgMeteors(sc);
@@ -87,7 +92,7 @@ function showLevelIntro(){
   const sc=document.getElementById('solar-canvas');
   sc.style.display='block';
   startBgMeteors(sc);
-  startMenuMusic(); // idempotente
+  //startMenuMusic(); // idempotente
 }
 
 function startLevel(){
