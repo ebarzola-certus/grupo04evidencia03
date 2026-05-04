@@ -31,4 +31,4 @@ const DIFFICULTIES = {
   }
 };
 
-export default DIFFICULTIES;
+export default DIFFICULTIES;// exporta la variable con toda las dificultades del juego 

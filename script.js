@@ -1,4 +1,4 @@
-import DIFFICULTIES from './dificulty.js';
+import DIFFICULTIES from './dificulty.js';// estoy inportando la variable con toda las dificultades del archivo dificulty js 
 import { menuHtml, winnerHtml, loserHtml, LevelIntro, introHtml } from './html.js';
 import { drawEarth } from './earth.js';
 import { startBgMeteors, stopBgMeteors } from './bgmeteors.js';
@@ -9,7 +9,7 @@ import {
 
 const canvas  = document.getElementById('canvas');
 const ctx     = canvas.getContext('2d');
-const ov      = document.getElementById('ov');
+const ov      = document.getElementById('ov');//se lllama al elemento div con el id ov
 const ptsEl   = document.getElementById('pts');
 const timEl   = document.getElementById('tim');
 const goalEl  = document.getElementById('goal');
@@ -17,7 +17,7 @@ const lvlNEl  = document.getElementById('lvl-n');
 const diffLbl = document.getElementById('diff-label');
 const lvlBarEl= document.getElementById('lvl-bar');
 
-const DIFFS = DIFFICULTIES;
+const DIFFS = DIFFICULTIES; // estoy pasando los valores a una variable constante local 
 const W = 980, H = 720, CX = W/2, CY = H/2, ER = 48;
 
 let meteors=[],explosions=[],shots=[],stars=[];
@@ -56,19 +56,21 @@ function showIntro() {
   ov.innerHTML = introHtml();
 }
 /*
+ mirosaqui ramirez bacilio 
+ esta funcion muestra las dificultades que tiene el juego 
 
 */
 function showMenu(){
-  running=false;
-  clearInterval(timerInt);clearInterval(spawnInt);
+  running=false;// es la variable para desactivar el inicio del juego 
+  clearInterval(timerInt);clearInterval(spawnInt);// para detener la ejecucion de las variables recien iniciadas 
   meteors=[];explosions=[];
-  document.getElementById('hud').style.visibility='hidden'; // 
-  const sc=document.getElementById('solar-canvas');
+  document.getElementById('hud').style.visibility='hidden'; // se oculta el div con el id hud 
+  const sc=document.getElementById('solar-canvas'); // se asigna  como  una variable constante el canvas donde se visualisara el canvas el fondo de los meteoritos 
   sc.style.display='block';
   startBgMeteors(sc);
   startMenuMusic(); // idempotente
   ov.style.display='flex';
-  ov.innerHTML=menuHtml(DIFFS);
+  ov.innerHTML=menuHtml(DIFFS);//esta funcion creara el menu en html que se presentara con toda las dificultades 
 }
 
 function selectDiff(key){

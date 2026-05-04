@@ -29,8 +29,8 @@ export function introHtml() {
     </div>
   `;
 }
-
-export function menuHtml(diffs){
+// se utiliza el ${Object.entries para convertirlo en objeto en una array de clave valor y con el .map lo hacemos iterable (similar a un for )
+export function menuHtml(diffs){//funcion con parametros donde el parametro es la variable con todas las dificultades del juego 
     return `
     <h2>☄️ Defensa Planetaria</h2>
     <p>Apunta y <strong style="color:#fff">haz click</strong> sobre los meteoros para destruirlos.
